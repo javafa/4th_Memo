@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -14,9 +12,13 @@ import java.util.ArrayList;
 //데이터를 저장하는 저장소를 관리하는 객체
 public class Model {
 	private final String DB_DIR  = "c:/workspaces/java/database";
+	// 데이터를 저장하기 위한 파일 저장소
 	private final String DB_FILE = "memo.txt";
+	// 인덱스를 저장하기 위한 파일 저장소
+	private final String INDEX_FILE = "memo_index.txt";
 	//                     mac 은       "/workspaces/java/database"
 	private File database = null;
+	private File database_index = null;
 	
 	// 전체 메모를 저장하는 저장소
 	ArrayList<Memo> list = new ArrayList<>();
@@ -43,6 +45,16 @@ public class Model {
 			}
 		}
 		database = file;
+		
+		File index = new File(DB_DIR + File.separator + INDEX_FILE);
+		if(!index.exists()){
+			try{
+				index.createNewFile();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		database_index = index;
 	}
 	
 	private final String COLUMN_SEP = "::";

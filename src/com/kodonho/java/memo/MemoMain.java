@@ -6,7 +6,7 @@ package com.kodonho.java.memo;
 public class MemoMain {
 
 	public static void main(String[] args) {
-		Model model = new Model();
+		ModelWithDB model = new ModelWithDB();
 		View view = new View();
 		
 		Control control = new Control(model, view);
